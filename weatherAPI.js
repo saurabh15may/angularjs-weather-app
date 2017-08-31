@@ -1,25 +1,21 @@
 $(document).ready(function() {
     $('#weather-data').hide();
-    
-    console.log("Hello");
-
-    var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 
     $( "#citySelector" ).change(function() {
-
+        var cityId = $("#citySelector").val();
+        var restURL =  "https://4ce8rjr0je.execute-api.us-east-1.amazonaws.com/dev/weather/city?id="+cityId;
+        console.log(restURL);
         $.ajax({
-            url: cors_api_url + "http://samples.openweathermap.org/data/2.5/weather?id=2172797&appid=0c87cd4372ac1f3b58570b17e8f7326b"
+            url: restURL 
         }).then(function(data) {
+          var data = JSON.parse(data.body);
           console.log(data);
-
-          $('#city').append(data.name);
-          $('#time').append(data.dt);
-          $('#description').append(data.weather[0].description);
-          $('#temperature').append(data.main.temp+ " Kelvin");
-          $('#wind').append(data.wind.speed+" meter/sec");
+          $('#city').html(data.city);
+          $('#time').html(data.updatedTime);
+          $('#description').html(data.weather);
+          $('#temperature').html(data.temperature + " degree celcius");
+          $('#wind').html(data.wind);
         });
-
         $('#weather-data').show();
-
     });
 });

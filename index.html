@@ -14,13 +14,13 @@
 
     <form>
     <select id="citySelector">
-      <option ng-repeat="city in cities" value="{{city}}">{{city}}</option>
+      <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
     </select>
     </form>
   </br>
 
     <div id="weather-data">
-        <table border="1">
+        <table border="0">
           <tr><td>City</td><td id="city"></td></tr>
           <tr><td>Updated time</td><td id="time"></td></tr>
           <tr><td>Weather</td><td id="description"></td></tr>
